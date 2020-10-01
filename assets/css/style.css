@@ -1,0 +1,83 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	background-color: #dfdfdf;
+	color: #000;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
+
+a{
+	text-decoration: none;
+}
+
+button,input,textarea {
+	outline: none !important;
+}
+
+button:focus, input:focus, textarea:focus{
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.todo{
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.todo textarea {
+	width: 100%;
+	resize: none;
+	height: 100%;
+	outline: none;
+}
+
+.todo .buttonGroup{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.todoList{
+	margin-top: 2em;
+}
+#list{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+	align-content: center;
+	line-height: 2;
+	grid-gap: 15px;
+}
+.todoList ul{
+	list-style-type: none;
+}
+.todoList li {
+	transition: all 0.4s ease-out;
+	opacity: 0;
+	border-bottom: 1px solid grey;
+	width: 100%;
+	text-align: center;
+}
+.todoList li.show {
+	opacity: 1;
+}
+
+.show:first-child{
+	grid-column: 1/span 2;
+}
+/* .todoOdd{
+	background-color: #e0e0e0;
+	color: #000;
+}
+
+.todoEven{
+	background-color: #000;
+	color: #fff;
+} */
