@@ -1,52 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="content-type" content="text/html charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="keywords" content="ToDo List,List,ToDo,yapılacaklar listesi" />
-	<meta name="subject" content="ToDo List" />
-	<meta name="language" content="English" />
-	<meta name="title" content="ToDoList" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="distribution" content="local" />
+<?php 
 
-	<!-- Bootstrap 4 CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+$query = $db -> prepare("SELECT * FROM todo");
+$query -> execute();
 
-	<title>ToDo List</title>
-</head>
-<body>
-	<div class="container">
-		<ul class="list-group">
-			<?php
-
-			try {
-
-				require_once 'database.php';
-
-				$sorgu = $db->query("SELECT yazi FROM todo");
-
-				while ($cikti = $sorgu->fetch(PDO::FETCH_ASSOC)) {
-					echo '<li class="list-group-item">'.$cikti["yazi"].'</li>';
-				}
-
-			} catch (PDOException $e) {
-				die($e->getMessage());
+?>
+<div class="container-fluid">
+	<ul class="list-group">
+		<h1 class="text-center mt-3 p-2">TODO LIST</h1>
+		<?php
+		if ($query -> rowCount()) {
+			foreach ($query as $row) {
+				echo '<li class="list-group-item txt my-1"><i>'.$row["yazi"].'</i>
+				<div class="buttonGroup">
+				<a class="btn btn-info mx-1 px-4" href="index.php?page=edit&id='.$row["id"].'">Edit</a>
+				<button data-id="'.$row["id"].'" class="btn btn-danger mx-1 sil" name="sil">Delete</button>
+				</div></li>';
 			}
+		}
+		?>
+	</ul>
+</div>
 
-			$db = null;
-
-			?>
-			
-		</ul>
-	</div>
-
-	<!-- Bootstrap 4 Cdn -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-	<!-- User Javascript -->
-	<script src="javascript/yoluYaz" type="text/javascript"></script>
-</body>
-</html>
+<!-- <a class="btn btn-info mx-1 px-4" href="edit.php?id='.base64_encode($row["id"]).'">Edit</a>
+				<a class="btn btn-danger mx-1" href="index.php?page=del?id='.base64_encode($row["id"]).'">Delete</a> -->

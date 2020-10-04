@@ -10,20 +10,60 @@ $('button.add').click(function() {
 		alert("Boş değer eklenemez. Tekrar Deneyiniz.");
 		todoText.focus();
 	}else {
-		var pathname = window.location.pathname;
 		$.ajax({
-			url: pathname+"ekle.php",
+			url: "http://localhost/todoProject/islemler.php",
 			type: 'POST',
 			data: {todotext: todoTextValue},
 		})
 		.done(function(data) {
-			var veri = $.parseJSON(data);
-			$('#list').append('<li class="show">'+veri+'</li>');
+			$('#list').append('<li class="show">'+data+'</li>');
 		})
 		.fail(function() {
 			console.log("error");
 		});
 
 		todoText.val("").focus();
+	}
+});
+
+$('button.sil').click(function() {
+	var id = $(this).data('id');
+	var url = "http://localhost/todoProject/index.php?page=del";
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: {id: id},
+	})
+	.done(function() {
+		alert("success");
+		location.reload();
+	})
+	.fail(function() {
+		console.log("error");
+	});
+});
+
+$('button.update').click(function() {
+	var id = $(this).data('id');
+	var newText = $('textarea#todo').val();
+	if (!todoText.val().trim()){
+		alert("Boş değer eklenemez. Tekrar Deneyiniz.");
+		todoText.focus();
+	}else {
+		$.ajax({
+			url: "http://localhost/todoProject/guncelle.php",
+			type: 'POST',
+			data: {
+				id: id,
+				text: newText
+			},
+		})
+		.done(function() {
+			alert("success");
+			window.location.replace('http://localhost/todoProject/index.php?page=list');
+		})
+		.fail(function() {
+			console.log("error");
+		});
 	}
 });
