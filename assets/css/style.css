@@ -1,122 +1,132 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-	background-color: #dfdfdf;
-	color: #000;
-	line-height: 1.6;
-	margin: 0;
-	padding: 0;
-	height: 100vh;
+body {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  line-height: 1.6;
+  grid-template-areas:
+    "header header"
+    "section section"
+    "footer footer";
+  grid-template-rows: minmax(65px, 75px) 5fr minmax(35px, 50px);
 }
 
-a{
-	text-decoration: none;
+a {
+  text-decoration: none !important;
 }
 
-button,input,textarea {
-	outline: none !important;
+body>header {
+  grid-area: header;
 }
 
-button:focus, input:focus, textarea:focus{
-	box-shadow: none !important;
-	outline: none !important;
+.menu {
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  height: 100%;
 }
 
-.header{
-
-}
-.menu{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: center;
-	justify-items: center;
-	align-items: center;
-	list-style: none;
-	grid-gap: 35px;
-	margin: 0;
-	padding: 0;
-}
-.menu li:first-child{
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
+.menu ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  height: 100%;
 }
 
-.menu li:last-child{
-	display: flex;
-	justify-content: flex-start;
-	width: 100%;
+.menu li {
+  display: inline-block;
 }
 
-.menu a{
-	font-size: 22px;
-	line-height: 1.6;
+body>section {
+  grid-area: section;
 }
 
-.todo{
-	display: grid;
-	grid-template-columns: 1fr;
+#todo {
+  width: 100%;
+  filter: drop-shadow(1px 2px 2px rgba(55, 45, 05, 0.5));
+  padding: 10px 15px;
+  resize: none;
 }
 
-.todo textarea {
-	width: 100%;
-	resize: none;
-	height: 100%;
-	outline: none;
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 10px;
 }
 
-.todo .buttonGroup{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.add {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0;
+  font-size: 1.2rem;
 }
 
-.todoList{
-	margin-top: 2em;
-}
-#list{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
-	align-items: center;
-	align-content: center;
-	line-height: 2;
-	grid-gap: 15px;
-}
-.todoList ul{
-	list-style-type: none;
-}
-.todoList li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.4s ease-out;
-	opacity: 0;
-	border-bottom: 1px solid grey;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-}
-.todoList li.show {
-	opacity: 1;
+.add .addList {
+  list-style: none;
+  display: grid;
+  grid-gap: 10px 0;
+  margin: 0;
+  padding: 0;
 }
 
-.show:first-child{
-	grid-column: 1/span 2;
-	text-indent: 0px;
+.add .show {
+  display: grid;
+  box-shadow: 0px 0px 4px red;
+  grid-template-columns: 1fr 50px;
+  grid-gap: 0 10px;
+  padding: 5px 15px;
 }
 
-/* listeleme buton grupları */
-.txt{
-	display: inline-grid;
-	grid-template-columns: 1fr 1fr;
-	align-content: center;
-	align-items: center;
+.add .show a {
+  text-align: end;
+  margin-right: 1rem;
 }
-.buttonGroup{
-	display: flex;
-	justify-content: flex-end;
+
+footer {
+  display: grid;
+  grid-area: footer;
+  background-color: skyblue;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+footer i {
+  font-size: 20px;
+}
+
+/* listeler.php css */
+.list {
+  width: 100%;
+  height: auto;
+}
+
+.listeler {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listeler li {
+  display: grid;
+  grid-template-columns: 1fr minmax(25px, 170px);
+  grid-gap: 5rem;
+  padding: 25px;
+  align-items: center;
+  align-content: center;
+  box-shadow: 1px 0px 4px red;
+  margin-bottom: 1rem;
+}
+
+.listeler .buttonGroup {
+  text-align: center;
+  margin-right: 30px;
 }
